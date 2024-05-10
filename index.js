@@ -34,7 +34,7 @@ app.get('/updatestatus/:address', async (req, res) => {
     const collection = client.db("blastinsight").collection("blastinsight_user");
     const userData = await collection.findOne({ _id: address });
 
-    if (userData && userData.status) {
+    if (!userData.status) {
       // 用户存在，计算新的energy值
       await collection.updateOne({ _id: address }, { $set: { "status": true } });
       const updatedUserData = await collection.findOne({ _id: address });
@@ -55,7 +55,7 @@ app.get('/get/:address', async (req, res) => {
     const collection = client.db("blastinsight").collection("blastinsight_user");
     // 尝试查找现有用户数据
     const userData = await collection.findOne({ _id: address });
-    if (userData && userData.status) {
+    if (userData) {
       res.status(200).json(userData);
     } else {
       // 用户不存在，创建新用户并返回整个新用户数据
