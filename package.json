@@ -1,0 +1,25 @@
+{
+  "name": "blast-gas-nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "mocha --experimental-modules test.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bson": "^6.5.0",
+    "cors": "^2.8.5",
+    "cros": "^1.0.1",
+    "express": "^4.19.2",
+    "mongodb": "^6.5.0"
+  },
+  "devDependencies": {
+    "chai": "^5.1.0",
+    "chai-http": "^4.4.0",
+    "mocha": "^10.3.0"
+  }
+}
