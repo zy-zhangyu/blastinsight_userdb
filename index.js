@@ -34,7 +34,7 @@ app.get('/updatestatus/:address', async (req, res) => {
     const collection = client.db("blastinsight").collection("blastinsight_user");
     const userData = await collection.findOne({ _id: address });
 
-    if (!userData.status) {
+    if (userData.status === false) {
       // 用户存在，计算新的energy值
       await collection.updateOne({ _id: address }, { $set: { "status": true } });
       const updatedUserData = await collection.findOne({ _id: address });
