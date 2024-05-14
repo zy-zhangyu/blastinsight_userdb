@@ -10,8 +10,8 @@ app.use(bodyParser.json());
 
 const uri = "mongodb+srv://dubai52233:Aaqweqweqwe123@cluster0.5p8on8l.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const client = new MongoClient(uri, {
-  serverApi: ServerApiVersion.v1,
-  useNewUrlParser: true
+  serverApi: ServerApiVersion.v1
+  // useNewUrlParser: true
   // useUnifiedTopology: true,
 });
 
