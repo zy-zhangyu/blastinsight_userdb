@@ -15,24 +15,26 @@ const client = new MongoClient(uri, {
   useUnifiedTopology: true,
 });
 
+let db;
+
 async function connectDB() {
-  if (!client.isConnected()) {
-    try {
-      await client.connect();
-      console.log('Connected to MongoDB');
-    } catch (error) {
-      console.error('Failed to connect to MongoDB:', error);
-    }
+  try {
+    await client.connect();
+    db = client.db("blastinsight");
+    console.log('Connected to MongoDB');
+  } catch (error) {
+    console.error('Failed to connect to MongoDB:', error);
   }
 }
 
+// 在应用启动时连接数据库
 connectDB().catch(console.error);
 
 app.get('/updatestatus/:address', async (req, res) => {
   console.log("updatestatus start");
   const { address } = req.params;
   try {
-    const collection = client.db("blastinsight").collection("blastinsight_user");
+    const collection = db.collection("blastinsight_user");
     const userData = await collection.findOne({ _id: address });
 
     if (userData && userData.status === false) {
@@ -52,7 +54,7 @@ app.get('/get/:address', async (req, res) => {
   console.log("get start");
   const { address } = req.params;
   try {
-    const collection = client.db("blastinsight").collection("blastinsight_user");
+    const collection = db.collection("blastinsight_user");
     const userData = await collection.findOne({ _id: address });
 
     if (userData) {
